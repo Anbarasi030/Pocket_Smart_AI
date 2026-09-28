@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketSmart AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+    <h1>PocketSmart AI</h1>
+    <p>Your Smart Budget & Recommendation Assistant</p>
+
+    <h2>Choose a Planner</h2>
+
+    <label>Home Budget:</label>
+    <input type="number" id="homeBudget" placeholder="Enter your budget">
+    <button onclick="generateHome()">Home Planner</button>
+
+    <label>Party Budget:</label>
+    <input type="number" id="partyBudget" placeholder="Enter party budget">
+
+    <label>Number of Guests:</label>
+    <input type="number" id="guests" placeholder="Enter number of guests">
+    <button onclick="generateParty()">Party Planner</button>
+
+    <label>Jewelry Budget:</label>
+    <input type="number" id="jewelryBudget" placeholder="Enter jewelry budget">
+    <button onclick="generateJewelry()">Jewelry Planner</button>
+
+
+    </div>
+    <h2>Result</h2>
+
+    <div id="result">
+    <div class="result-card">
+        <h3>Welcome to PocketSmart AI</h3>
+        <p>Choose a planner to get recommendations.</p>
+    </div>
+</div>
+
+    <script>
+      async function generateHome() {
+    const budget = document.getElementById("homeBudget").value;
+
+    if (!budget || budget <= 0) {
+        document.getElementById("result").innerHTML = `
+            <div class="result-card">
+                <h3>⚠️ Invalid Input</h3>
+                <p>Please enter a valid Home Budget.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const response = await fetch(
+        "http://127.0.0.1:5000/generate-home",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                budget: Number(budget)
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    document.getElementById("result").innerHTML = `
+        <div class="result-card">
+            <h3>🏠 Home Budget Planner</h3>
+
+            <div class="budget">
+                💰 Budget: ₹${budget}
+            </div>
+
+            <h4>✨ AI Recommendation</h4>
+            <p>${data.fallback || data.message}</p>
+        </div>
+    `;
+}
+
+        async function generateParty() {
+
+    const budget = document.getElementById("partyBudget").value;
+    const guests = document.getElementById("guests").value;
+
+    if (!budget || budget <= 0 || !guests || guests <= 0) {
+        document.getElementById("result").innerHTML = `
+            <div class="result-card">
+                <h3>⚠️ Invalid Input</h3>
+                <p>Please enter a valid Party Budget and Number of Guests.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const response = await fetch(
+        "http://127.0.0.1:5000/generate-party"
+    );
+
+    const data = await response.json();
+
+    document.getElementById("result").innerHTML = `
+        <div class="result-card">
+            <h3>🎉 Party Planner</h3>
+            <div class="budget">💰 Budget: ₹${budget}</div>
+            <p>👥 Guests: ${guests}</p>
+            <h4>✨ AI Recommendation</h4>
+            <p>${data.fallback || data.message}</p>
+            <h4>📋 Suggested Plan</h4>
+            <p>• Food and refreshments</p>
+            <p>• Decorations</p>
+            <p>• Seating arrangement</p>
+            <p>• Music and entertainment</p>
+        </div>
+    `;
+}
+    
+        async function generateJewelry() {
+
+    const budget = document.getElementById("jewelryBudget").value;
+
+    if (!budget || budget <= 0) {
+        document.getElementById("result").innerHTML = `
+            <div class="result-card">
+                <h3>⚠️ Invalid Input</h3>
+                <p>Please enter a valid Jewelry Budget.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const response = await fetch(
+        "http://127.0.0.1:5000/generate-jewelry"
+    );
+
+    const data = await response.json();
+
+    document.getElementById("result").innerHTML = `
+        <div class="result-card">
+            <h3>💎 Jewelry Planner</h3>
+            <div class="budget">💰 Budget: ₹${budget}</div>
+            <h4>✨ AI Recommendation</h4>
+            <p>${data.fallback || data.message}</p>
+            <h4>📋 Suggested Items</h4>
+            <p>• Earrings</p>
+            <p>• Necklace</p>
+            <p>• Bangles</p>
+            <p>• Matching bracelet</p>
+        </div>
+    `;
+}
+    
+    </script>
+
+    </div>
+</body>
+</html>
