@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff4e6, #f3e8ff);
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #7c3aed;
+    margin-bottom: 10px;
+    font-size: 38px;
+}
+
+.container > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+}
+
+h2 {
+    color: #4c1d95;
+    margin: 25px 0 15px;
+}
+
+/* Input labels */
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #4c1d95;
+}
+
+/* Input boxes */
+input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 2px solid #e5d9ff;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px #f3e8ff;
+}
+
+/* Planner buttons */
+.planner-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+button {
+    flex: 1;
+    min-width: 180px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #7c3aed;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Result area */
+#result {
+    background: #f8f5ff;
+    border: 1px solid #e5d9ff;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 100px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.result-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    margin-top: 5px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #7c3aed;
+}
+
+.result-card h3 {
+    color: #7c3aed;
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+.result-card p {
+    color: #555;
+    line-height: 1.7;
+    white-space: pre-line;
+    margin-bottom: 8px;
+}
+
+.budget {
+    display: inline-block;
+    background: #f3e8ff;
+    color: #6d28d9;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px 10px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 22px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .planner-buttons {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
