@@ -14,7 +14,7 @@ FRONTEND_DIR = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../../frontend")
 )
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=FRONTEND_DIR)
 CORS(app)
 
 @app.route("/")
