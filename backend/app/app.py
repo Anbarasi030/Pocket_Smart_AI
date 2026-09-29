@@ -23,7 +23,7 @@ CORS(app)
 
 @app.route("/")
 def home():
-    return send_from_directory((FRONTEND_DIR, "index.html")
+    return send_from_directory(FRONTEND_DIR, "index.html")
 
 @app.route("/generate-home", methods=["GET", "POST"])
 def generate_home():
