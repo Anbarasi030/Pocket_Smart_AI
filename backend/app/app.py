@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -10,16 +10,16 @@ print("Key loaded:", bool(GEMINI_API_KEY))
 print("Key length:", len(GEMINI_API_KEY) if GEMINI_API_KEY else 0)
 client=genai.Client(api_key=GEMINI_API_KEY)
 
+FRONTEND_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../../frontend")
+)
+
 app = Flask(__name__)
 CORS(app)
 
-
 @app.route("/")
 def home():
-    return jsonify({
-        "message": "PocketSmart AI Backend is running!"
-    })
-
+    return send_from_directory(app.static_folder, "index.html")
 
 @app.route("/generate-home", methods=["GET", "POST"])
 def generate_home():
