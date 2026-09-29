@@ -14,12 +14,12 @@ FRONTEND_DIR = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../../frontend")
 )
 
-app = Flask(__name__, static_folder=FRONTEND_DIR)
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
 CORS(app)
 
 @app.route("/")
 def home():
-    return send_from_directory(app.static_folder, "index.html")
+    return send_from_directory((FRONTEND_DIR, "index.html")
 
 @app.route("/generate-home", methods=["GET", "POST"])
 def generate_home():
